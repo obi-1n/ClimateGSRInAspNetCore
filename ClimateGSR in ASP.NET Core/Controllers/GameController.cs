@@ -20,11 +20,16 @@ namespace ClimateGSR_in_ASP.NET_Core.Controllers
         private const string SessionKey = "GameState";
 
         private readonly ClimateGSRDbContext _db;
+        private readonly LeaderboardService _leaderboard;
         private readonly UserManager<ApplicationUser> _userManager;
 
-        public GameController(ClimateGSRDbContext db, UserManager<ApplicationUser> userManager)
+        public GameController(
+            ClimateGSRDbContext db,
+            LeaderboardService leaderboard,
+            UserManager<ApplicationUser> userManager)
         {
             _db = db;
+            _leaderboard = leaderboard;
             _userManager = userManager;
         }
 
@@ -165,6 +170,15 @@ namespace ClimateGSR_in_ASP.NET_Core.Controllers
 
             ViewBag.Feedback = TempData["Feedback"];            //Message about the final round
             return View(s.Game);
+        }
+
+        /// <summary>
+        /// Displays the leaderboard ranked by players' highest single-game scores.
+        /// </summary>
+        [HttpGet]
+        public IActionResult Leaderboard()
+        {
+            return View(_leaderboard.GetTopPlayers(_userManager.GetUserId(User)));
         }
 
         /// <summary>

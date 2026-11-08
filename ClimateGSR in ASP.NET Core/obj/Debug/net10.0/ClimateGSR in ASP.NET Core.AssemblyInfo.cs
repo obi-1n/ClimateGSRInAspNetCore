@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("ClimateGSR in ASP.NET Core")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+a926a0e6b36f196b8bec42151e4753fffd1d49b2")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+ed35e8d407cf6fc84be9397ab79402ab904c2228")]
 [assembly: System.Reflection.AssemblyProductAttribute("ClimateGSR in ASP.NET Core")]
 [assembly: System.Reflection.AssemblyTitleAttribute("ClimateGSR in ASP.NET Core")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
