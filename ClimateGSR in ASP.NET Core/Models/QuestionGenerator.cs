@@ -10,11 +10,9 @@ namespace ClimateGSR_in_ASP.NET_Core.Models
     using System.Globalization;
     using System.Linq;
 
-    //Builds quiz questions from the Countries table. Each question has an
-    //emissions prompt (shown at the start), the answer (the country's name),
-    //and a shuffled list of hints about the country.
-    // Countries below this population are never chosen - makes questions guessable
-
+    /// <summary>
+    /// Builds randomized quiz questions from country data, including emissions prompts and shuffled hints.
+    /// </summary>
     public class QuestionGenerator
     {
         /// <summary>

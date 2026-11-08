@@ -22,18 +22,18 @@
                                 </svg>
                             </div>
                             <h2 class="login-title" id="leaderboard-title">Game Leaderboard</h2>
-                            <p class="login-subtitle">Top 10 players ranked by all-time score. Ties are broken by highest single-game score.</p>
+                            <p class="login-subtitle">Top 10 players ranked by their highest single-game score.</p>
                         </div>
 
                         <div class="table-responsive">
                             <table class="table table-hover align-middle eco-table">
-                                <caption>Players start at 0 points. Scores update when completed games are recorded.</caption>
+                                <caption>Only signed-in players' completed games are recorded.</caption>
                                 <thead>
                                     <tr>
                                         <th scope="col">Rank</th>
                                         <th scope="col">Player</th>
-                                        <th scope="col" class="text-end">All-time score</th>
                                         <th scope="col" class="text-end">High score</th>
+                                        <th scope="col" class="text-end">All-time score</th>
                                         <th scope="col" class="text-end">Games played</th>
                                     </tr>
                                 </thead>
@@ -41,7 +41,7 @@
                                     @if (Model.Count == 0)
                                     {
                                         <tr>
-                                            <td colspan="5" class="text-center">No players yet. @Html.ActionLink("Create an account", "Register", "Account", null, new { @class = "login-link" }) to join the leaderboard.</td>
+                                            <td colspan="5" class="text-center">No scores yet. Sign in and complete a game to join the leaderboard.</td>
                                         </tr>
                                     }
                                     @foreach (var player in Model)
@@ -55,8 +55,8 @@
                                                     <span class="badge bg-success ms-1">You</span>
                                                 }
                                             </td>
-                                            <td class="text-end fw-bold">@player.AllTimeScore</td>
-                                            <td class="text-end">@player.HighScore</td>
+                                            <td class="text-end fw-bold">@player.HighScore</td>
+                                            <td class="text-end">@player.AllTimeScore</td>
                                             <td class="text-end">@player.GamesPlayed</td>
                                         </tr>
                                     }

@@ -4,6 +4,9 @@ using System.Linq;
 
 namespace ClimateGSR_in_ASP.NET_Core.Models
 {
+    /// <summary>
+    /// Retrieves and ranks saved player scores for leaderboard views.
+    /// </summary>
     public class LeaderboardService
     {
         private readonly ClimateGSRDbContext _context;
@@ -30,8 +33,9 @@ namespace ClimateGSR_in_ASP.NET_Core.Models
                                    ? user.HighScore : member.Highscore,
                                GamesPlayed = member == null ? 0 : member.GamesPlayed
                            })
-                .OrderByDescending(player => player.AllTimeScore)     // main ranking
-                .ThenByDescending(player => player.HighScore)         // tiebreaker
+                .Where(player => player.GamesPlayed > 0 || player.HighScore > 0)
+                .OrderByDescending(player => player.HighScore)        // main ranking
+                .ThenByDescending(player => player.AllTimeScore)      // tiebreaker
                 .ThenBy(player => player.FirstName)
                 .ThenBy(player => player.LastName)
                 .ThenBy(player => player.Id)
@@ -46,9 +50,8 @@ namespace ClimateGSR_in_ASP.NET_Core.Models
                 if (!string.IsNullOrWhiteSpace(player.LastName))
                     name += " " + player.LastName.Trim()[0] + ".";
 
-                // Share a rank only when both all-time score and high score are equal
+                // Leaderboard rank is based on the best single-game score.
                 bool tiedWithPrevious = i > 0
-                    && player.AllTimeScore == players[i - 1].AllTimeScore
                     && player.HighScore == players[i - 1].HighScore;
 
                 entries.Add(new LeaderboardEntryViewModel

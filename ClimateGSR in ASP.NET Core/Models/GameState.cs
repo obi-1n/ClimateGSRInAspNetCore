@@ -5,12 +5,16 @@ using System.Text.Json.Serialization;
 
 namespace ClimateGSR_in_ASP.NET_Core.Models
 {
+    /// <summary>
+    /// Tracks a player's current game round, revealed hints, and score-persistence status in session.
+    /// </summary>
     public class GameState
     {
 
         public Game Game { get; set; } = new();
         public int CurrentIndex { get; set; }
         public int HintsRevealed { get; set; }
+        public string? PlayerId { get; set; }
 
         // Calculated, so not stored in the session JSON (Current would throw once the game is finished)
         [JsonIgnore] public Question Current { get { return Game.Questions[CurrentIndex]; } } 

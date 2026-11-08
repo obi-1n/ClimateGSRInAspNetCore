@@ -7,6 +7,9 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace ClimateGSR_in_ASP.NET_Core.Controllers
 {
+    /// <summary>
+    /// A country's climate and population statistics formatted for the home-page map.
+    /// </summary>
     public class CountryStat
     {
         public string IsoCode { get; set; } = string.Empty;
@@ -19,6 +22,9 @@ namespace ClimateGSR_in_ASP.NET_Core.Controllers
         public double? RawPopulation { get; set; }
     }
 
+    /// <summary>
+    /// Serves the home page and climate statistics used by its interactive map.
+    /// </summary>
     public class HomeController : Controller
     {
         // Keep PascalCase property names in the JSON (ASP.NET Core defaults to camelCase,
@@ -102,24 +108,6 @@ namespace ClimateGSR_in_ASP.NET_Core.Controllers
                     update(stat, value);
                 }
             }
-        }
-
-        public IActionResult About()
-        {
-            ViewBag.Message = "Your application description page.";
-            return View();
-        }
-
-        public IActionResult Contact()
-        {
-            ViewBag.Message = "Your contact page.";
-            return View();
-        }
-
-        // Linked from _Layout.cshtml
-        public IActionResult Privacy()
-        {
-            return View();
         }
 
         // Used by app.UseExceptionHandler("/Home/Error") in Program.cs

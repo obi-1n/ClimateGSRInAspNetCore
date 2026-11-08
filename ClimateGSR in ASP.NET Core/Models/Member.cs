@@ -8,6 +8,9 @@ using System.Threading.Tasks;
 
 namespace ClimateGSR_in_ASP.NET_Core.Models
 {
+    /// <summary>
+    /// Stores a user's game statistics, including lifetime points, games played, and high score.
+    /// </summary>
     public class Member
     {
         [Key] public int MemberId { get; set; }
