@@ -10,12 +10,33 @@ builder.Services.AddDbContext<ClimateGSRDbContext>(options =>
         builder.Configuration.GetConnectionString("DefaultConnection")));
 
 // Identity
-builder.Services.AddIdentity<ApplicationUser, IdentityRole>()
+builder.Services.AddIdentity<ApplicationUser, IdentityRole>(options =>
+    {
+        // Matches the MVC 5 template: users sign in with their email, so it must be unique
+        options.User.RequireUniqueEmail = true;
+    })
     .AddEntityFrameworkStores<ClimateGSRDbContext>()
     .AddDefaultTokenProviders()
     .AddClaimsPrincipalFactory<ApplicationUserClaimsPrincipalFactory>();
 
+// Your controllers use /Account/Login and /Account/LogOff (Core's defaults are Login/Logout)
+builder.Services.ConfigureApplicationCookie(options =>
+{
+    options.LoginPath = "/Account/Login";
+    options.LogoutPath = "/Account/LogOff";
+    options.AccessDeniedPath = "/Account/Login";
+});
+
 builder.Services.AddScoped<LeaderboardService>();
+
+// Session stores the game in progress (GameController)
+builder.Services.AddDistributedMemoryCache();
+builder.Services.AddSession(options =>
+{
+    options.IdleTimeout = TimeSpan.FromMinutes(30);
+    options.Cookie.HttpOnly = true;
+    options.Cookie.IsEssential = true;
+});
 
 builder.Services.AddControllersWithViews();
 
@@ -37,6 +58,8 @@ if (!app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 app.UseRouting();
+
+app.UseSession();
 
 // Authentication BEFORE Authorization
 app.UseAuthentication();

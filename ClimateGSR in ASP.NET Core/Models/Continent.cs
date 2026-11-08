@@ -36,6 +36,8 @@ namespace ClimateGSR_in_ASP.NET_Core.Models
         /// <summary>
         /// Navigation collection of countries belonging to this continent.
         /// </summary>
+        // Not stored in the session JSON: Country -> Continent -> Countries would loop forever
+        [System.Text.Json.Serialization.JsonIgnore]
         public virtual ICollection<Country> Countries { get; set; }
     }
 }
