@@ -1,0 +1,52 @@
+﻿@model ClimateGSR_in_ASP.NET_Core.Models.Game
+
+@{
+    ViewBag.Title = "Game Over";
+}
+
+<div class="game-page">
+
+    <h2 class="center">Game over!</h2>
+
+    <div class="score-big">@Model.Score</div>
+    <p class="center">points out of a possible @(Model.Questions.Count * 100)</p>
+
+    @if (ViewBag.ScoreSaved == true)
+    {
+        <p class="center">Your score has been saved to your profile.</p>
+    }
+    else
+    {
+        <p class="center">
+            @Html.ActionLink("Log in", "Login", "Account", null, new { @class = "login-link" })
+            or @Html.ActionLink("register", "Register", "Account", null, new { @class = "login-link" })
+            to save your scores and appear on the leaderboard.
+        </p>
+    }
+
+    @if (!string.IsNullOrEmpty(ViewBag.Feedback as string))
+    {
+        <div class="message">@ViewBag.Feedback</div>
+    }
+
+    <div class="country-list">
+        <strong>Countries in this game:</strong>
+        <ul>
+            @foreach (var q in Model.Questions)
+            {
+                <li>@q.Answer</li>
+            }
+        </ul>
+    </div>
+
+    <div class="center">
+        <p style="margin-top:10px">
+            @Html.ActionLink("Play again", "Start", "Game", null, new { @class = "game-btn" })
+        </p>
+
+        <p style="margin-top:10px">
+            @Html.ActionLink("View Leaderboard", "Leaderboard", "Game", null, new { @class = "game-btn" })
+        </p>
+    </div>
+
+</div>

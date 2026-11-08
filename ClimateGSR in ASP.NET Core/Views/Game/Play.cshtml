@@ -1,0 +1,62 @@
+﻿@model ClimateGSR_in_ASP.NET_Core.Models.PlayViewModel
+
+@{
+    ViewBag.Title = "Round " + Model.RoundNumber;
+}
+
+<div class="game-page">
+
+    <div class="top-bar">
+        <span>Round @Model.RoundNumber of @Model.TotalRounds</span>
+        <span>Score: @Model.Score</span>
+    </div>
+
+    @if (!string.IsNullOrEmpty(Model.Feedback))
+    {
+        <div class="message">@Model.Feedback</div>
+    }
+
+    <div class="question-box">
+        <h4>Which country is this?</h4>
+        <p>@Model.EmissionsPrompt</p>
+    </div>
+
+    @if (Model.RevealedHints.Count == 0)
+    {
+        <p>No hints revealed yet.</p>
+    }
+
+    @foreach (var hint in Model.RevealedHints)
+    {
+        <div class="hint-box">@hint.Value</div>
+    }
+
+    <p>Points available for this round: <strong>@Model.PointsAvailable</strong></p>
+
+    @using (Html.BeginForm("Guess", "Game", FormMethod.Post))
+    {
+        @Html.AntiForgeryToken()
+        <input type="text" name="guess" class="guess-input" placeholder="Enter a country" autocomplete="off" autofocus />
+        <button type="submit" class="game-btn">Guess</button>
+    }
+
+    <div class="button-row">
+        @if (Model.CanRevealMore)
+        {
+            using (Html.BeginForm("RevealHint", "Game", FormMethod.Post))
+            {
+                @Html.AntiForgeryToken()
+        <button type="submit" class="game-btn game-btn-light">
+            @(Model.RevealedHints.Count < 2 ? "Reveal hint (free)" : "Reveal hint (-25 points)")
+        </button>
+            }
+        }
+
+        @using (Html.BeginForm("GiveUp", "Game", FormMethod.Post))
+        {
+            @Html.AntiForgeryToken()
+            <button type="submit" class="game-btn game-btn-light">Give up</button>
+        }
+    </div>
+
+</div>

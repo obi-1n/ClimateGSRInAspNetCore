@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.FileProviders;
 using ClimateGSR_in_ASP.NET_Core.Models;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -57,6 +58,12 @@ if (!app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+app.UseStaticFiles(new StaticFileOptions
+{
+    FileProvider = new PhysicalFileProvider(
+        Path.Combine(app.Environment.ContentRootPath, "Content")),
+    RequestPath = "/Content"
+});
 app.UseRouting();
 
 app.UseSession();

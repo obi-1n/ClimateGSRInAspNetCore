@@ -1,0 +1,75 @@
+@model System.Collections.Generic.List<ClimateGSR_in_ASP.NET_Core.Models.LeaderboardEntryViewModel>
+@{
+    ViewBag.Title = "Game Leaderboard";
+}
+
+<main class="login-page" aria-labelledby="leaderboard-title">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-10 col-xl-9">
+                <div class="card dashboard-card">
+                    <div class="login-card-top-bar"></div>
+                    <div class="card-body p-4 p-md-5">
+                        <div class="text-center">
+                            <div class="login-brand-badge" aria-hidden="true">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6" />
+                                    <path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18" />
+                                    <path d="M4 22h16" />
+                                    <path d="M10 14.66V17c0 .55-.47.98-.97 1.21C7.85 18.75 7 20.24 7 22" />
+                                    <path d="M14 14.66V17c0 .55.47.98.97 1.21C16.15 18.75 17 20.24 17 22" />
+                                    <path d="M18 2H6v7a6 6 0 0 0 12 0V2Z" />
+                                </svg>
+                            </div>
+                            <h2 class="login-title" id="leaderboard-title">Game Leaderboard</h2>
+                            <p class="login-subtitle">Top 10 players ranked by all-time score. Ties are broken by highest single-game score.</p>
+                        </div>
+
+                        <div class="table-responsive">
+                            <table class="table table-hover align-middle eco-table">
+                                <caption>Players start at 0 points. Scores update when completed games are recorded.</caption>
+                                <thead>
+                                    <tr>
+                                        <th scope="col">Rank</th>
+                                        <th scope="col">Player</th>
+                                        <th scope="col" class="text-end">All-time score</th>
+                                        <th scope="col" class="text-end">High score</th>
+                                        <th scope="col" class="text-end">Games played</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @if (Model.Count == 0)
+                                    {
+                                        <tr>
+                                            <td colspan="5" class="text-center">No players yet. @Html.ActionLink("Create an account", "Register", "Account", null, new { @class = "login-link" }) to join the leaderboard.</td>
+                                        </tr>
+                                    }
+                                    @foreach (var player in Model)
+                                    {
+                                        <tr class="@(player.IsCurrentPlayer ? "table-success" : null)">
+                                            <th scope="row">@player.Rank</th>
+                                            <td>
+                                                @player.PlayerName
+                                                @if (player.IsCurrentPlayer)
+                                                {
+                                                    <span class="badge bg-success ms-1">You</span>
+                                                }
+                                            </td>
+                                            <td class="text-end fw-bold">@player.AllTimeScore</td>
+                                            <td class="text-end">@player.HighScore</td>
+                                            <td class="text-end">@player.GamesPlayed</td>
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+
+                        <div class="text-center mt-3">
+                            @Html.ActionLink("Play a game", "Start", "Game", null, new { @class = "btn btn-dashboard-action", style = "width:auto; padding-left:2rem; padding-right:2rem;" })
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>

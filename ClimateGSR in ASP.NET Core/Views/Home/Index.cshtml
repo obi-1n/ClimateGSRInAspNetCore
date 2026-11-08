@@ -1,8 +1,241 @@
 ﻿@{
-    ViewData["Title"] = "Home Page";
+    ViewBag.Title = "ClimateGSR - Interactive Map";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+<!--Leaflet CSS-->
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+
+<style>
+    .game-container {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 20px;
+        margin-top: 20px;
+    }
+
+    #map {
+        flex: 1 1 65%;
+        height: 600px;
+        background-color: #d4e6f1; /* ocean colour */
+        border: 2px solid #2d6a4f;
+        border-radius: 16px;
+        box-shadow: 0 10px 25px -8px rgba(27, 67, 50, 0.25);
+    }
+
+    .stats-panel {
+        flex: 1 1 30%;
+        min-width: 280px;
+        background: #ffffff;
+        border: 1px solid rgba(82, 183, 136, 0.35);
+        border-radius: 16px;
+        padding: 20px;
+        box-shadow: 0 10px 25px -8px rgba(27, 67, 50, 0.18);
+    }
+
+        .stats-panel h3 {
+            margin-top: 0;
+            border-bottom: 2px solid #52b788;
+            color: #1b4332;
+            padding-bottom: 10px;
+        }
+
+    .stat-item {
+        margin: 15px 0;
+        font-size: 1.1rem;
+    }
+
+    .stat-label {
+        font-weight: bold;
+        color: #2d6a4f;
+    }
+</style>
+
+<div class="container-fluid">
+    <div class="home-hero">
+        <h2>Climate Awareness Geo-Explorer</h2>
+        <p>Hover over an outlined country and click to inspect its climate and demographic statistics.</p>
+    </div>
+
+    <div class="game-container">
+        <!--inteactive map container-->
+        <div id="map"></div>
+
+        <!--country stats display-->
+        <div class="stats-panel">
+            <h3 id="stat-country">Select a Country</h3>
+            <div id="stat-content">
+                <p class="text-muted">Click on any outlined country on the map to view its data.</p>
+            </div>
+        </div>
+    </div>
 </div>
+
+<!--leaflet js-->
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        // initialise leaflt.js map
+        const map = L.map('map', {
+            center: [20, 0],
+            zoom: 1.5,
+            minZoom: 1,
+            zoomSnap: 0.25,
+            zoomDelta: 0.5,
+            maxBounds: [[-90, -180], [90, 180]]
+        });
+
+        //track currently selected country and json layer
+        let selectedLayer = null;
+        let climateDataMap = {};
+
+        //common country names that might not match csv data and json outlines
+        const nameAliases = {
+            "United States of America": "United States",
+            "Russian Federation": "Russia",
+            "United Republic of Tanzania": "Tanzania",
+            "Republic of Serbia": "Serbia",
+            "Czechia": "Czech Republic",
+            "Democratic Republic of the Congo": "DR Congo",
+            "Korea, Republic of": "South Korea",
+            "Iran (Islamic Republic of)": "Iran"
+        };
+
+        // define the default, hover, and selected styles for countries
+        const defaultStyle = {
+            color: "#2d6a4f",       //Outline colour
+            weight: 1.5,            //Outline thickness
+            fillColor: "#f1f8f4",   //Default unclicked fill
+            fillOpacity: 0.7
+        };
+
+        const inactiveCountryStyle = {
+            color: "#bdc3c7",
+            weight: 0.5,
+            fillColor: "#ecf0f1",
+            fillOpacity: 0.3,
+            interactive: false //Disable interaction for countries not in the CSV data
+        };
+
+        const hoverStyle = {
+            color: "#2d6a4f",
+            weight: 2,
+            fillColor: "#95d5b2",   //Light green on hover
+            fillOpacity: 0.85
+        };
+
+        const selectedStyle = {
+            color: "#1b4332",
+            weight: 2.5,
+            fillColor: "#52b788",   //Remains green once clicked
+            fillOpacity: 0.9
+        };
+
+        //helper function to retrieve country stats from the climateDataMap, considering aliases
+        function getCountryStats(geoName) {
+            if (!geoName) return null;
+            const key = geoName.toLowerCase();
+            if (climateDataMap[key]) return climateDataMap[key];
+
+            const alias = nameAliases[geoName];
+            if (alias && climateDataMap[alias.toLowerCase()]) {
+                return climateDataMap[alias.toLowerCase()];
+            }
+            return null;
+        }
+
+        //fetch csv data from the server and then fetch the GeoJSON polygons for countries
+        fetch('@Url.Action("GetClimateData", "Home")')
+            .then(response => response.json())
+            .then(data => {
+                //store csv data in a map for quick access by country name
+                data.forEach(item => {
+                    if (item.Country)
+                    {
+                        climateDataMap[item.Country.trim().toLowerCase()] = item;
+                    }
+                });
+
+                //fetch the GeoJSON data for countries from the GitHub repository
+                return fetch('https://raw.githubusercontent.com/datasets/geo-countries/master/data/countries.geojson');
+            })
+            .then(response => response.json())
+            .then(geoData => {
+                geoJsonLayer = L.geoJson(geoData, {
+                    style: function (feature) {
+                        const countryName = feature.properties.ADMIN || feature.properties.name;
+                        const hasData = getCountryStats(countryName) !== null;
+                        //only outline countries that are within the csv data, others are greyed out
+                        return hasData ? defaultStyle : inactiveCountryStyle;
+                    },
+                    onEachFeature: function (feature, layer) {
+                        const countryName = feature.properties.ADMIN || feature.properties.name;
+                        const countryStats = getCountryStats(countryName);
+
+                        //only attach hover and click events to countries in the CSV files
+                        if (countryStats) {
+                            // Track selection state directly on the layer instance
+                            layer.isSelected = false;
+
+                            layer.on('mouseover', function () {
+                                if (!layer.isSelected) {
+                                    layer.setStyle(hoverStyle);
+                                }
+                            });
+
+                            layer.on('mouseout', function () {
+                                if (!layer.isSelected) {
+                                    layer.setStyle(defaultStyle);
+                                }
+                            });
+
+                            layer.on('click', function () {
+                                // 1. If a previous country was selected, unselect it and reset its colour
+                                if (selectedLayer && selectedLayer !== layer) {
+                                    selectedLayer.isSelected = false;
+                                    selectedLayer.setStyle(defaultStyle);
+                                }
+
+                                // 2. Mark the clicked country as selected and colour it green
+                                layer.isSelected = true;
+                                selectedLayer = layer;
+                                layer.setStyle(selectedStyle);
+
+                                // 3. Update the stats panel
+                                updateStatsPanel(countryStats);
+                            });
+                        }
+                    }
+                }).addTo(map);
+            })
+            .catch(err => console.error("Error loading map or climate data:", err));
+
+        //update the UI with the selected country's CSV stats
+        function updateStatsPanel(stats) {
+            const countryHeader = document.getElementById("stat-country");
+            const contentBox = document.getElementById("stat-content");
+
+            if (countryHeader && contentBox) {
+                countryHeader.innerText = stats.Country;
+                contentBox.innerHTML = `
+                    <div class="stat-item">
+                        <span class="stat-label">Annual CO₂ Emissions:</span><br/>
+                        <span>${stats.CO2}</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-label">CO₂ Per Capita:</span><br/>
+                        <span>${stats.CO2PerCapita}</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-label">Population:</span><br/>
+                        <span>${stats.Population}</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-label">Average Temperature:</span><br/>
+                        <span>${stats.Temperature}</span>
+                    </div>
+                `;
+            }
+        }
+    });
+</script>

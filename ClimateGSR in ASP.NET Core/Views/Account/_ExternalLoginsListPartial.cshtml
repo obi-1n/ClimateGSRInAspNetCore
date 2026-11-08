@@ -1,0 +1,31 @@
+﻿@model ClimateGSR_in_ASP.NET_Core.Models.ExternalLoginListViewModel
+@using Microsoft.AspNetCore.Authentication
+
+@{
+    var schemeProvider = Context.RequestServices.GetService<IAuthenticationSchemeProvider>();
+    var loginProviders = schemeProvider == null
+        ? Array.Empty<AuthenticationScheme>()
+        : await schemeProvider.GetAllSchemesAsync();
+
+    var externalLogins = loginProviders
+        .Where(p => !string.IsNullOrWhiteSpace(p.Name))
+        .ToList();
+
+    if (externalLogins.Count > 0)
+    {
+        <div class="my-3 position-relative text-center">
+            <hr class="text-muted opacity-25" />
+            <span class="position-absolute top-50 start-50 translate-middle bg-white px-3 text-muted small">or sign in with</span>
+        </div>
+        using (Html.BeginForm("ExternalLogin", "Account", new { ReturnUrl = Model.ReturnUrl }, FormMethod.Post, null, new { role = "form" }))
+        {
+            @Html.AntiForgeryToken()
+            <div id="socialLoginList" class="d-flex justify-content-center gap-2 flex-wrap mb-2">
+                @foreach (var p in externalLogins)
+                {
+                    <button type="submit" class="btn btn-outline-success btn-sm px-3 rounded-pill" id="@p.Name" name="provider" value="@p.Name" title="Log in using your @p.DisplayName account">@p.DisplayName</button>
+                }
+            </div>
+        }
+    }
+}

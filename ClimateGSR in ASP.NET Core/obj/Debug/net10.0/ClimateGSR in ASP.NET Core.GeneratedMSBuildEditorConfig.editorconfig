@@ -31,6 +31,70 @@ build_property._RazorSourceGeneratorDebug =
 build_property.EffectiveAnalysisLevelStyle = 10.0
 build_property.EnableCodeStyleSeverity = 
 
+[/Users/anthonynnegha/Desktop/ClimateGSR in ASP.NET Core/ClimateGSR in ASP.NET Core/Views/Account/ConfirmEmail.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvQWNjb3VudC9Db25maXJtRW1haWwuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/anthonynnegha/Desktop/ClimateGSR in ASP.NET Core/ClimateGSR in ASP.NET Core/Views/Account/ExternalLoginConfirmation.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvQWNjb3VudC9FeHRlcm5hbExvZ2luQ29uZmlybWF0aW9uLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/anthonynnegha/Desktop/ClimateGSR in ASP.NET Core/ClimateGSR in ASP.NET Core/Views/Account/ExternalLoginFailure.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvQWNjb3VudC9FeHRlcm5hbExvZ2luRmFpbHVyZS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/anthonynnegha/Desktop/ClimateGSR in ASP.NET Core/ClimateGSR in ASP.NET Core/Views/Account/ForgotPassword.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvQWNjb3VudC9Gb3Jnb3RQYXNzd29yZC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/anthonynnegha/Desktop/ClimateGSR in ASP.NET Core/ClimateGSR in ASP.NET Core/Views/Account/ForgotPasswordConfirmation.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvQWNjb3VudC9Gb3Jnb3RQYXNzd29yZENvbmZpcm1hdGlvbi5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/anthonynnegha/Desktop/ClimateGSR in ASP.NET Core/ClimateGSR in ASP.NET Core/Views/Account/Login.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvQWNjb3VudC9Mb2dpbi5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/anthonynnegha/Desktop/ClimateGSR in ASP.NET Core/ClimateGSR in ASP.NET Core/Views/Account/Register.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvQWNjb3VudC9SZWdpc3Rlci5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/anthonynnegha/Desktop/ClimateGSR in ASP.NET Core/ClimateGSR in ASP.NET Core/Views/Account/ResetPassword.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvQWNjb3VudC9SZXNldFBhc3N3b3JkLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/anthonynnegha/Desktop/ClimateGSR in ASP.NET Core/ClimateGSR in ASP.NET Core/Views/Account/ResetPasswordConfirmation.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvQWNjb3VudC9SZXNldFBhc3N3b3JkQ29uZmlybWF0aW9uLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/anthonynnegha/Desktop/ClimateGSR in ASP.NET Core/ClimateGSR in ASP.NET Core/Views/Account/SendCode.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvQWNjb3VudC9TZW5kQ29kZS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/anthonynnegha/Desktop/ClimateGSR in ASP.NET Core/ClimateGSR in ASP.NET Core/Views/Account/VerifyCode.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvQWNjb3VudC9WZXJpZnlDb2RlLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/anthonynnegha/Desktop/ClimateGSR in ASP.NET Core/ClimateGSR in ASP.NET Core/Views/Account/_ExternalLoginsListPartial.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvQWNjb3VudC9fRXh0ZXJuYWxMb2dpbnNMaXN0UGFydGlhbC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/anthonynnegha/Desktop/ClimateGSR in ASP.NET Core/ClimateGSR in ASP.NET Core/Views/Game/Leaderboard.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvR2FtZS9MZWFkZXJib2FyZC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/anthonynnegha/Desktop/ClimateGSR in ASP.NET Core/ClimateGSR in ASP.NET Core/Views/Game/Play.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvR2FtZS9QbGF5LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/anthonynnegha/Desktop/ClimateGSR in ASP.NET Core/ClimateGSR in ASP.NET Core/Views/Game/Result.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvR2FtZS9SZXN1bHQuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/anthonynnegha/Desktop/ClimateGSR in ASP.NET Core/ClimateGSR in ASP.NET Core/Views/Games/Leaderboard.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvR2FtZXMvTGVhZGVyYm9hcmQuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
 [/Users/anthonynnegha/Desktop/ClimateGSR in ASP.NET Core/ClimateGSR in ASP.NET Core/Views/Home/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3MvSG9tZS9JbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
@@ -39,8 +103,40 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3MvSG9tZS9Qcml2YWN5LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
+[/Users/anthonynnegha/Desktop/ClimateGSR in ASP.NET Core/ClimateGSR in ASP.NET Core/Views/Manage/ChangePassword.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvTWFuYWdlL0NoYW5nZVBhc3N3b3JkLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/anthonynnegha/Desktop/ClimateGSR in ASP.NET Core/ClimateGSR in ASP.NET Core/Views/Manage/DeleteAccount.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvTWFuYWdlL0RlbGV0ZUFjY291bnQuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/anthonynnegha/Desktop/ClimateGSR in ASP.NET Core/ClimateGSR in ASP.NET Core/Views/Manage/EditAccount.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvTWFuYWdlL0VkaXRBY2NvdW50LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/anthonynnegha/Desktop/ClimateGSR in ASP.NET Core/ClimateGSR in ASP.NET Core/Views/Manage/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvTWFuYWdlL0luZGV4LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/anthonynnegha/Desktop/ClimateGSR in ASP.NET Core/ClimateGSR in ASP.NET Core/Views/Manage/ManageLogins.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvTWFuYWdlL01hbmFnZUxvZ2lucy5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/anthonynnegha/Desktop/ClimateGSR in ASP.NET Core/ClimateGSR in ASP.NET Core/Views/Manage/SetPassword.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvTWFuYWdlL1NldFBhc3N3b3JkLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
 [/Users/anthonynnegha/Desktop/ClimateGSR in ASP.NET Core/ClimateGSR in ASP.NET Core/Views/Shared/Error.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3MvU2hhcmVkL0Vycm9yLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/anthonynnegha/Desktop/ClimateGSR in ASP.NET Core/ClimateGSR in ASP.NET Core/Views/Shared/Games/Leaderboard.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvU2hhcmVkL0dhbWVzL0xlYWRlcmJvYXJkLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/anthonynnegha/Desktop/ClimateGSR in ASP.NET Core/ClimateGSR in ASP.NET Core/Views/Shared/_LoginPartial.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvU2hhcmVkL19Mb2dpblBhcnRpYWwuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
 [/Users/anthonynnegha/Desktop/ClimateGSR in ASP.NET Core/ClimateGSR in ASP.NET Core/Views/Shared/_ValidationScriptsPartial.cshtml]

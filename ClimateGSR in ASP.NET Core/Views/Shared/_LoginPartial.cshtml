@@ -1,0 +1,23 @@
+﻿@using ClimateGSR_in_ASP.NET_Core.Models
+@if (User.Identity?.IsAuthenticated == true)
+{
+    <form asp-controller="Account" asp-action="LogOff" method="post" id="logoutForm" class="navbar-right">
+        @Html.AntiForgeryToken()
+
+        <ul class="navbar-nav navbar-right">
+            <li>
+                <a class="nav-link" asp-controller="Manage" asp-action="Index" title="Manage">Hello @User.Identity.GetFirstName()!</a>
+            </li>
+            <li>
+                <button type="submit" class="btn btn-link nav-link">Log off</button>
+            </li>
+        </ul>
+    </form>
+}
+else
+{
+    <ul class="navbar-nav navbar-right">
+        <li><a class="nav-link" asp-controller="Account" asp-action="Register" id="registerLink">Register</a></li>
+        <li><a class="nav-link" asp-controller="Account" asp-action="Login" id="loginLink">Log in</a></li>
+    </ul>
+}
